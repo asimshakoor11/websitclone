@@ -1,3 +1,7 @@
+
+
+
+
 let checkout1 = document.getElementById("checkout1");
 let checkout2 = document.getElementById("checkout2");
 
@@ -16,12 +20,10 @@ function goback() {
 }
 
 close.addEventListener("click", () => {
-  console.log("clickeddd");
   checkout1.classList.add("hidden");
 });
 
 close2.addEventListener("click", () => {
-  console.log("clickeddd");
   checkout2.classList.add("hidden");
 });
 
@@ -31,8 +33,8 @@ close2.addEventListener("click", () => {
 //   checkout1.classList.add("hidden");
 // });
 
-// let fullname =""
-// let mail_email = ""
+let fullname =""
+let mail_email = ""
 
 function userdata() {
   if (
@@ -42,18 +44,19 @@ function userdata() {
     document.getElementById("fullnamevalue").classList.add("is-danger");
     document.getElementById("emailvalue").classList.add("is-danger");
   } else {
-    console.log("clickeddd");
+    fullname = document.getElementById("fullnamevalue").value;
+    mail_email = document.getElementById("emailvalue").value;
+
+    // document.getElementById("fullnamebtm").value = fullname;
+    // document.getElementById("emailvaluebtm").value = mail_email;
     checkout2.classList.remove("hidden");
     checkout1.classList.add("hidden");
   }
-  // fullname = document.getElementById("fullnamevalue").value;
-  // mail_email = document.getElementById("emailvalue").value;
-
-  // console.log(fullname);
-  // console.log(mail_email);
+  console.log(fullname);
+  console.log(mail_email);
 }
-// console.log(fullname);
-// console.log(mail_email);
+console.log(fullname);
+console.log(mail_email);
 let totalprice = 12.0;
 
 let desc2 = document.getElementById("desc2");
@@ -83,22 +86,27 @@ function showdesc3() {
       }
 }
 
-document.getElementById("totalprice").innerText = "$" + totalprice;
+  document.getElementById("totalprice").innerText = "$" + totalprice + ".00";
 
-// function sendMail() {
-//   var params = {
-//     name: fullname,
-//     email: mail_email,
-//   };
 
-//   const servieID = "service_3myjm7y";
-//   const templateID = "template_bm4bfgt";
 
-//   emailjs
-//     .send(servieID, templateID, params)
-//     .then((res) => {
-//       console.log(res);
-//       alert("Your Messsage Sent Successfully!");
-//     })
-//     .catch((err) => console.log(err));
-// }
+function sendMail() {
+  var params = {
+    name:  fullname,
+    email: mail_email,
+    order_total: "$" + totalprice + ".00",
+  };
+
+  const servieID = "service_3myjm7y";
+  const templateID = "template_bm4bfgt";
+
+  emailjs
+    .send(servieID, templateID, params)
+    .then((res) => {
+      console.log(res);
+      alert("Your Order is Successfully Placed!");
+      checkout2.classList.add("hidden");
+      checkout1.classList.add("hidden");
+    })
+    .catch((err) => console.log(err));
+}
