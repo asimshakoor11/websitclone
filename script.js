@@ -15,7 +15,7 @@ function checkout() {
 }
 
 function goback() {
-  checkout1.classList.remove("hidden");
+  checkout1.classList.remove("hidden"); 
   checkout2.classList.add("hidden");
 }
 
